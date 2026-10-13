@@ -1790,6 +1790,16 @@ section,
     color-mix(in srgb, var(--accent-color), transparent 90%);
 }
 
+.contact-map {
+  width: 100%;
+}
+
+.contact-map iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
 .contact .info-item + .info-item {
   margin-top: 40px;
 }
