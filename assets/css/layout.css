@@ -1,0 +1,211 @@
+/* Small layout utilities used by the page instead of the full Bootstrap CSS. */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, svg {
+  vertical-align: middle;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 12px;
+}
+
+body {
+  margin: 0;
+}
+
+.container-fluid {
+  width: 100%;
+  padding-inline: 12px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: -12px;
+}
+
+.row.gy-4 {
+  row-gap: 1.5rem;
+}
+
+.row > * {
+  width: 100%;
+  max-width: 100%;
+  padding-inline: 12px;
+}
+
+.d-flex { display: flex !important; }
+.d-none { display: none !important; }
+.flex-column { flex-direction: column !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.align-items-center { align-items: center !important; }
+.justify-content-center { justify-content: center !important; }
+.justify-content-between { justify-content: space-between !important; }
+.text-center { text-align: center !important; }
+.position-relative { position: relative !important; }
+.img-fluid { max-width: 100%; height: auto; }
+.fst-italic { font-style: italic !important; }
+.g-0 { --layout-gap: 0px; }
+.g-0 > * { padding-inline: 0; }
+.mt-3 { margin-top: 1rem !important; }
+.mt-4 { margin-top: 1.5rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+.mb-5 { margin-bottom: 3rem !important; }
+.pt-3 { padding-top: 1rem !important; }
+.px-1 { padding-inline: .25rem !important; }
+.ms-4 { margin-left: 1.5rem !important; }
+.me-auto { margin-right: auto !important; }
+
+.form-control,
+.form-select {
+  display: block;
+  width: 100%;
+  padding: .375rem .75rem;
+  color: #212529;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: .25rem;
+  appearance: none;
+}
+
+.form-control:focus,
+.form-select:focus {
+  outline: 0;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25);
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-item {
+  position: relative;
+  display: none;
+  width: 100%;
+  transition: opacity .6s ease;
+  backface-visibility: hidden;
+}
+
+.carousel-item.active {
+  display: block;
+}
+
+.carousel-fade .carousel-item {
+  opacity: 0;
+}
+
+.carousel-fade .carousel-item.active {
+  opacity: 1;
+}
+
+.carousel-indicators {
+  position: absolute;
+  right: 0;
+  bottom: 1rem;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0 15% 1rem;
+  list-style: none;
+}
+
+.carousel-indicators button {
+  width: 30px;
+  height: 3px;
+  margin-inline: 3px;
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  background: rgba(255, 255, 255, .5);
+}
+
+.carousel-indicators button.active {
+  background: #fff;
+}
+
+.nav {
+  display: flex;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: .5rem 1rem;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tab-content > .tab-pane {
+  display: none;
+}
+
+.tab-content > .active {
+  display: block;
+}
+
+@media (min-width: 576px) {
+  .container { max-width: 540px; }
+}
+
+@media (min-width: 768px) {
+  .container { max-width: 720px; }
+  .col-md-3 { width: 25%; }
+  .col-md-4 { width: 33.333333%; }
+  .col-md-6 { width: 50%; }
+  .col-md-12 { width: 100%; }
+  .justify-content-md-between { justify-content: space-between !important; }
+  .d-md-flex { display: flex !important; }
+  .order-1 { order: 1; }
+  .order-2 { order: 2; }
+}
+
+@media (min-width: 992px) {
+  .container { max-width: 960px; }
+  .col-lg-2 { width: 16.666667%; }
+  .col-lg-3 { width: 25%; }
+  .col-lg-4 { width: 33.333333%; }
+  .col-lg-6 { width: 50%; }
+  .col-lg-8 { width: 66.666667%; }
+  .col-lg-9 { width: 75%; }
+  .col-lg-12 { width: 100%; }
+  .order-lg-1 { order: 1; }
+  .order-lg-2 { order: 2; }
+  .mt-lg-0 { margin-top: 0 !important; }
+}
+
+.col-12 { width: 100%; }
+
+@media (min-width: 1200px) {
+  .container { max-width: 1140px; }
+  .col-xl-8 { width: 66.666667%; }
+  .me-xl-0 { margin-right: 0 !important; }
+  .d-xl-block { display: block !important; }
+}
+
+@media (min-width: 1400px) {
+  .container { max-width: 1320px; }
+}
+
+@media (max-width: 575px) {
+  .row.gy-4 > * { margin-bottom: 1.5rem; }
+}

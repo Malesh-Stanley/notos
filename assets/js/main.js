@@ -96,43 +96,52 @@
   window.addEventListener('load', aosInit);
 
   /**
+   * Lightweight replacements for the Bootstrap carousel and tabs used here.
+   */
+  function initHeroCarousel() {
+    const carousel = document.querySelector('#heroCarousel');
+    if (!carousel) return;
+
+    const slides = [...carousel.querySelectorAll('.carousel-item')];
+    const indicators = [...carousel.querySelectorAll('.carousel-indicators button')];
+    let activeIndex = slides.findIndex(slide => slide.classList.contains('active'));
+    if (activeIndex < 0) activeIndex = 0;
+
+    const showSlide = index => {
+      activeIndex = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === activeIndex));
+      indicators.forEach((indicator, indicatorIndex) => indicator.classList.toggle('active', indicatorIndex === activeIndex));
+    };
+
+    indicators.forEach((indicator, index) => indicator.addEventListener('click', () => showSlide(index)));
+    window.setInterval(() => showSlide(activeIndex + 1), 5000);
+  }
+
+  function initSpecialTabs() {
+    document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
+      tab.addEventListener('click', event => {
+        event.preventDefault();
+        const target = document.querySelector(tab.getAttribute('href'));
+        const tabGroup = tab.closest('.nav-tabs');
+        const content = target?.parentElement;
+        if (!target || !tabGroup || !content) return;
+
+        tabGroup.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active', 'show'));
+        content.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active', 'show'));
+        tab.classList.add('active', 'show');
+        target.classList.add('active', 'show');
+      });
+    });
+  }
+
+  window.addEventListener('load', initHeroCarousel);
+  window.addEventListener('load', initSpecialTabs);
+
+  /**
    * Initiate glightbox
    */
   const glightbox = GLightbox({
     selector: '.glightbox'
-  });
-
-  /**
-   * Init isotope layout and filters
-   */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
-    let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
-    let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
-    let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
-
-    let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
-      initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
-        itemSelector: '.isotope-item',
-        layoutMode: layout,
-        filter: filter,
-        sortBy: sort
-      });
-    });
-
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
-        this.classList.add('filter-active');
-        initIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        if (typeof aosInit === 'function') {
-          aosInit();
-        }
-      }, false);
-    });
-
   });
 
   /**
